@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="refresh" content="300">
+<title>Price Search Scraper — snapshot</title>
+<style>
+  :root {
+    --bg: #14151a; --panel: #1c1e26; --line: #2c2f3a; --text: #eceef2;
+    --muted: #8a8fa3; --accent: #ffcc4d;
+  }
+  * { box-sizing: border-box; }
+  body { margin:0; background:var(--bg); color:var(--text); font-family:-apple-system,"Hiragino Sans","Yu Gothic",sans-serif; padding:16px; }
+  .logo { height:56px; display:block; margin-bottom:6px; }
+  .updated { color:var(--muted); font-size:12px; margin-bottom:16px; }
+  .grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(230px,1fr)); gap:10px; }
+  .watch-row { display:flex; flex-direction:column; gap:8px; background:var(--panel); border:1px solid var(--line); border-radius:10px; padding:12px; font-size:12px; }
+  .watch-card-header { display:flex; align-items:center; gap:8px; }
+  .watch-thumb { width:48px; height:48px; border-radius:8px; object-fit:cover; border:1px solid var(--line); }
+  .watch-thumb-placeholder { width:48px; height:48px; border-radius:8px; border:1px dashed var(--line); display:inline-block; }
+  .watch-name { font-weight:700; font-size:15px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+  .watch-divider { border:none; border-top:2px solid var(--line); margin:0; }
+  .watch-current { color:var(--muted); font-size:11.5px; }
+  .watch-price.trend-down { color:#2ecc71; }
+  .watch-price.trend-up { color:#ff3355; }
+  .watch-notes { font-size:11.5px; color:var(--text); background:var(--bg); border:1px solid var(--line); border-radius:6px; padding:6px 8px; }
+  .watch-controls { font-size:11px; color:var(--muted); }
+  .spark-wrap { display:block; height:26px; width:100%; }
+  .sparkline { width:100%; height:100%; display:block; color:var(--accent); overflow:visible; }
+  .sparkline.trend-down { color:#2ecc71; }
+  .sparkline.trend-up { color:#ff3355; }
+  .spark-empty { font-size:10px; color:var(--muted); opacity:0.7; }
+  .empty { color:var(--muted); }
+  .watch-row.target-hit-high { border-color:#ff3355; box-shadow:0 0 14px 3px rgba(255,51,85,0.7); }
+  .watch-row.target-hit-low { animation: rainbow 2.4s linear infinite; }
+  @keyframes rainbow {
+    0%   { border-color:#ff3355; box-shadow:0 0 14px 3px rgba(255,51,85,0.7); }
+    16%  { border-color:#ff9d33; box-shadow:0 0 14px 3px rgba(255,157,51,0.7); }
+    33%  { border-color:#ffee33; box-shadow:0 0 14px 3px rgba(255,238,51,0.7); }
+    50%  { border-color:#33ff57; box-shadow:0 0 14px 3px rgba(51,255,87,0.7); }
+    66%  { border-color:#33d4ff; box-shadow:0 0 14px 3px rgba(51,212,255,0.7); }
+    83%  { border-color:#a233ff; box-shadow:0 0 14px 3px rgba(162,51,255,0.7); }
+    100% { border-color:#ff3355; box-shadow:0 0 14px 3px rgba(255,51,85,0.7); }
+  }
+</style>
+</head>
+<body>
+  <img class="logo" src="logo.png" alt="Price Search Scraper" onerror="this.style.display='none'">
+  <div class="updated">Snapshot updated 2026-09-10 06:47 UTC — refreshes automatically every 5 min</div>
+  <div class="grid">
+    <div class="watch-row">
+      <div class="watch-card-header">
+        <img class="watch-thumb" src="card_images/ミュウex_UR_208_165.png">
+        <span class="watch-name">ミュウex UR 208/165</span>
+      </div>
+      <hr class="watch-divider">
+      <span class="watch-current">current: <b class="watch-price trend-down">¥17,400 ↓</b> (SNKRDUNK) — checked 1m ago</span>
+      <span class="spark-wrap"><svg class="sparkline trend-down" viewBox="0 0 200 26" preserveAspectRatio="none"><polyline points="6.0,6.2 53.0,6.2 100.0,20.0 147.0,6.0 194.0,6.1" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="6.0" cy="6.2" r="3" fill="currentColor"/></svg></span>
+      <div class="watch-notes">prime time 17k</div>
+      <div class="watch-controls">Low ¥16,505</div>
+    </div>
+    <div class="watch-row">
+      <div class="watch-card-header">
+        <img class="watch-thumb" src="card_images/ブラッキーVMAX_245_184.png">
+        <span class="watch-name">ブラッキーVMAX 245/184</span>
+      </div>
+      <hr class="watch-divider">
+      <span class="watch-current">current: <b class="watch-price trend-down">¥26,800 ↓</b> (SNKRDUNK) — checked just now</span>
+      <span class="spark-wrap"><svg class="sparkline trend-down" viewBox="0 0 200 26" preserveAspectRatio="none"><polyline points="6.0,7.9 53.0,15.3 100.0,20.0 147.0,6.0 194.0,12.5" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="6.0" cy="7.9" r="3" fill="currentColor"/></svg></span>
+      <div class="watch-notes">slight down</div>
+      <div class="watch-controls">Low ¥24,000</div>
+    </div>
+    <div class="watch-row">
+      <div class="watch-card-header">
+        <img class="watch-thumb" src="card_images/レックウザVMAX_CSR.png">
+        <span class="watch-name">レックウザVMAX CSR</span>
+      </div>
+      <hr class="watch-divider">
+      <span class="watch-current">current: <b class="watch-price trend-down">¥29,800 ↓</b> (Yahoo Auctions) — checked just now</span>
+      <span class="spark-wrap"><svg class="sparkline trend-down" viewBox="0 0 200 26" preserveAspectRatio="none"><polyline points="6.0,6.0 53.0,6.5 100.0,10.7 147.0,20.0 194.0,20.0" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="6.0" cy="6.0" r="3" fill="currentColor"/></svg></span>
+      <div class="watch-notes">slight down</div>
+      <div class="watch-controls">Low ¥27,000</div>
+    </div>
+    <div class="watch-row">
+      <div class="watch-card-header">
+        <img class="watch-thumb" src="card_images/レックウザ_252_184.png">
+        <span class="watch-name">レックウザ 252/184</span>
+      </div>
+      <hr class="watch-divider">
+      <span class="watch-current">current: <b class="watch-price trend-down">¥29,800 ↓</b> (Yahoo Auctions) — checked 10m ago</span>
+      <span class="spark-wrap"><svg class="sparkline trend-down" viewBox="0 0 200 26" preserveAspectRatio="none"><polyline points="6.0,6.0 53.0,6.5 100.0,8.3 147.0,20.0 194.0,20.0" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="6.0" cy="6.0" r="3" fill="currentColor"/></svg></span>
+      <div class="watch-notes">slight down</div>
+      <div class="watch-controls">Low ¥27,000</div>
+    </div>
+    <div class="watch-row">
+      <div class="watch-card-header">
+        <img class="watch-thumb" src="card_images/ピカチュウVMAX_223_184.png">
+        <span class="watch-name">ピカチュウVMAX 223/184</span>
+      </div>
+      <hr class="watch-divider">
+      <span class="watch-current">current: <b class="watch-price ">¥34,000</b> (Mercari) — checked 9m ago</span>
+      <span class="spark-wrap"><svg class="sparkline " viewBox="0 0 200 26" preserveAspectRatio="none"><polyline points="6.0,6.0 53.0,6.0 100.0,6.0 147.0,20.0 194.0,6.5" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="194.0" cy="6.5" r="3" fill="currentColor"/></svg></span>
+      <div class="watch-notes">slight down</div>
+      <div class="watch-controls">Low ¥29,000</div>
+    </div>
+    <div class="watch-row">
+      <div class="watch-card-header">
+        <img class="watch-thumb" src="card_images/リザードンV_SR_103_100.png">
+        <span class="watch-name">リザードンV SR 103/100</span>
+      </div>
+      <hr class="watch-divider">
+      <span class="watch-current">current: <b class="watch-price ">¥60,000</b> (Mercari) — checked 8m ago</span>
+      <span class="spark-wrap"><svg class="sparkline " viewBox="0 0 200 26" preserveAspectRatio="none"><polyline points="6.0,6.0 53.0,6.0 100.0,20.0 147.0,20.0 194.0,20.0" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="194.0" cy="20.0" r="3" fill="currentColor"/></svg></span>
+      <div class="watch-notes">Consider at 57k</div>
+      <div class="watch-controls">Low ¥59,000</div>
+    </div>
+    <div class="watch-row">
+      <div class="watch-card-header">
+        <img class="watch-thumb" src="card_images/イーブイ&amp;カビゴンGX_SM-P_297.png">
+        <span class="watch-name">イーブイ&amp;カビゴンGX SM-P 297</span>
+      </div>
+      <hr class="watch-divider">
+      <span class="watch-current">current: <b class="watch-price trend-down">¥78,500 ↓</b> (Yahoo Auctions) — checked 8m ago</span>
+      <span class="spark-wrap"><svg class="sparkline trend-down" viewBox="0 0 200 26" preserveAspectRatio="none"><polyline points="6.0,10.1 53.0,6.0 100.0,6.0 147.0,20.0 194.0,18.4" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="6.0" cy="10.1" r="3" fill="currentColor"/></svg></span>
+      
+      <div class="watch-controls">Low ¥75,000</div>
+    </div>
+    <div class="watch-row">
+      <div class="watch-card-header">
+        <img class="watch-thumb" src="card_images/アーマードミュウツー.png">
+        <span class="watch-name">アーマードミュウツー</span>
+      </div>
+      <hr class="watch-divider">
+      <span class="watch-current">current: <b class="watch-price ">¥119,000</b> (Yahoo Auctions) — checked 7m ago</span>
+      <span class="spark-wrap"><svg class="sparkline " viewBox="0 0 200 26" preserveAspectRatio="none"><polyline points="6.0,15.3 53.0,6.0 100.0,20.0 147.0,20.0 194.0,20.0" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="194.0" cy="20.0" r="3" fill="currentColor"/></svg></span>
+      <div class="watch-notes">Low pop</div>
+      <div class="watch-controls">Low ¥99,999</div>
+    </div>
+    <div class="watch-row">
+      <div class="watch-card-header">
+        <img class="watch-thumb" src="card_images/レックウザVMAX_HR.png">
+        <span class="watch-name">レックウザVMAX HR</span>
+      </div>
+      <hr class="watch-divider">
+      <span class="watch-current">current: <b class="watch-price ">¥51,000</b> (Yahoo Auctions) — checked 6m ago</span>
+      <span class="spark-wrap"><svg class="sparkline " viewBox="0 0 200 26" preserveAspectRatio="none"><polyline points="6.0,13.0 53.0,13.0 100.0,20.0 147.0,6.0 194.0,6.0" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="194.0" cy="6.0" r="3" fill="currentColor"/></svg></span>
+      
+      <div class="watch-controls">Low ¥48,000</div>
+    </div>
+    <div class="watch-row">
+      <div class="watch-card-header">
+        <img class="watch-thumb" src="card_images/ブラッキーVMAX_HR.png">
+        <span class="watch-name">ブラッキーVMAX HR</span>
+      </div>
+      <hr class="watch-divider">
+      <span class="watch-current">current: <b class="watch-price ">¥18,000</b> (SNKRDUNK) — checked 6m ago</span>
+      <span class="spark-wrap"><svg class="sparkline " viewBox="0 0 200 26" preserveAspectRatio="none"><polyline points="6.0,20.0 53.0,20.0 100.0,6.0 147.0,6.0 194.0,6.0" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="194.0" cy="6.0" r="3" fill="currentColor"/></svg></span>
+      
+      <div class="watch-controls">Low ¥17,500</div>
+    </div>
+    <div class="watch-row">
+      <div class="watch-card-header">
+        <img class="watch-thumb" src="card_images/リザードンex_201_165.png">
+        <span class="watch-name">リザードンex 201/165</span>
+      </div>
+      <hr class="watch-divider">
+      <span class="watch-current">current: <b class="watch-price trend-down">¥97,000 ↓</b> (SNKRDUNK) — checked 5m ago</span>
+      <span class="spark-wrap"><svg class="sparkline trend-down" viewBox="0 0 200 26" preserveAspectRatio="none"><polyline points="6.0,6.0 53.0,6.1 100.0,6.4 147.0,20.0 194.0,6.5" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="6.0" cy="6.0" r="3" fill="currentColor"/></svg></span>
+      
+      <div class="watch-controls">Low ¥95,000</div>
+    </div>
+    <div class="watch-row">
+      <div class="watch-card-header">
+        <img class="watch-thumb" src="card_images/ミュウex_SAR_205_165.png">
+        <span class="watch-name">ミュウex SAR 205/165</span>
+      </div>
+      <hr class="watch-divider">
+      <span class="watch-current">current: <b class="watch-price trend-down">¥65,800 ↓</b> (SNKRDUNK) — checked 4m ago</span>
+      <span class="spark-wrap"><svg class="sparkline trend-down" viewBox="0 0 200 26" preserveAspectRatio="none"><polyline points="6.0,6.0 53.0,6.4 100.0,7.2 147.0,20.0 194.0,19.1" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="6.0" cy="6.0" r="3" fill="currentColor"/></svg></span>
+      
+      <div class="watch-controls">Low ¥64,000</div>
+    </div>
+    <div class="watch-row">
+      <div class="watch-card-header">
+        <img class="watch-thumb" src="card_images/ミュウV_SR__SA_106_100.png">
+        <span class="watch-name">ミュウV SR: SA 106/100</span>
+      </div>
+      <hr class="watch-divider">
+      <span class="watch-current">current: <b class="watch-price trend-down">¥36,000 ↓</b> (Mercari) — checked 4m ago</span>
+      <span class="spark-wrap"><svg class="sparkline trend-down" viewBox="0 0 200 26" preserveAspectRatio="none"><polyline points="6.0,6.0 53.0,13.0 100.0,20.0 147.0,20.0 194.0,20.0" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="6.0" cy="6.0" r="3" fill="currentColor"/></svg></span>
+      <div class="watch-notes">downward, consider at 30k
+8k pop</div>
+      <div class="watch-controls">Low ¥34,100</div>
+    </div>
+    <div class="watch-row">
+      <div class="watch-card-header">
+        <img class="watch-thumb" src="card_images/ロケット団のミュウツーex_SAR.png">
+        <span class="watch-name">ロケット団のミュウツーex SAR</span>
+      </div>
+      <hr class="watch-divider">
+      <span class="watch-current">current: <b class="watch-price trend-down">¥24,000 ↓</b> (SNKRDUNK) — checked 3m ago</span>
+      <span class="spark-wrap"><svg class="sparkline trend-down" viewBox="0 0 200 26" preserveAspectRatio="none"><polyline points="6.0,6.0 53.0,18.8 100.0,12.0 147.0,16.8 194.0,20.0" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="6.0" cy="6.0" r="3" fill="currentColor"/></svg></span>
+      
+      <div class="watch-controls">Low ¥22,000</div>
+    </div>
+    <div class="watch-row">
+      <div class="watch-card-header">
+        <img class="watch-thumb" src="card_images/ミュウVMAX_HR_118_100.png">
+        <span class="watch-name">ミュウVMAX HR 118/100</span>
+      </div>
+      <hr class="watch-divider">
+      <span class="watch-current">current: <b class="watch-price trend-down">¥26,800 ↓</b> (SNKRDUNK) — checked 3m ago</span>
+      <span class="spark-wrap"><svg class="sparkline trend-down" viewBox="0 0 200 26" preserveAspectRatio="none"><polyline points="6.0,6.0 53.0,14.4 100.0,14.4 147.0,20.0 194.0,20.0" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="6.0" cy="6.0" r="3" fill="currentColor"/></svg></span>
+      <div class="watch-notes">Downward, consider at 20k
+1.5k pop</div>
+      <div class="watch-controls">Low ¥22,000</div>
+    </div>
+    <div class="watch-row">
+      <div class="watch-card-header">
+        <img class="watch-thumb" src="card_images/レックウザV_SR_076_067.png">
+        <span class="watch-name">レックウザV SR 076/067</span>
+      </div>
+      <hr class="watch-divider">
+      <span class="watch-current">current: <b class="watch-price trend-down">¥166,200 ↓</b> (Mercari) — checked 2m ago</span>
+      <span class="spark-wrap"><svg class="sparkline trend-down" viewBox="0 0 200 26" preserveAspectRatio="none"><polyline points="6.0,6.0 194.0,20.0" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="6.0" cy="6.0" r="3" fill="currentColor"/></svg></span>
+      
+      <div class="watch-controls">Low ¥150,000</div>
+    </div>
+    <div class="watch-row">
+      <div class="watch-card-header">
+        <img class="watch-thumb" src="card_images/カイリューV_SR_074_067.png">
+        <span class="watch-name">カイリューV SR 074/067</span>
+      </div>
+      <hr class="watch-divider">
+      <span class="watch-current">current: <b class="watch-price trend-down">¥122,222 ↓</b> (SNKRDUNK) — checked 1m ago</span>
+      <span class="spark-wrap"><svg class="sparkline trend-down" viewBox="0 0 200 26" preserveAspectRatio="none"><polyline points="6.0,6.0 194.0,20.0" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="6.0" cy="6.0" r="3" fill="currentColor"/></svg></span>
+      
+      <div class="watch-controls">Low ¥115,000</div>
+    </div></div>
+</body>
+</html>
